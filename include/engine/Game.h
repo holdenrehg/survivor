@@ -5,9 +5,11 @@ namespace Catcher::Survivor
     class Game
     {
         public:
+            Game();
             void run();
+            void stop();
 
-        // private:
-        //     ...
+        private:
+            bool running;
     };
 }

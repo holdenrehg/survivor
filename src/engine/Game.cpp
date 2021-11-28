@@ -4,8 +4,22 @@
 using namespace std;
 using namespace Catcher::Survivor;
 
-void Game::run()
+Game::Game()
 {
-    cout << "running the game..." << endl;
+    running = false;
 }
 
+void Game::run()
+{
+    running = true;
+
+    while(running)
+    {
+        //
+    }
+}
+
+void Game::stop()
+{
+    running = false;
+}
