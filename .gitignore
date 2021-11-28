@@ -1,0 +1,12 @@
+.settings/
+.*project
+.idea
+*.iml
+
+cmake-build/
+build/
+out/
+bin/
+
+*.swp
+
