@@ -12,7 +12,9 @@ include_directories(${PROJECT_SOURCE_DIR})
 add_executable(
     game
     src/main.cpp
+    src/engine/Clock.cpp
     src/engine/Event.cpp
     src/engine/EventHandler.cpp
     src/engine/Game.cpp
+    src/engine/time.cpp
 )
