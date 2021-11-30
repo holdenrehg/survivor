@@ -1,6 +1,7 @@
 #include <chrono>
 #include <iostream>
 #include <type_traits>
+#include "raylib.h"
 #include "include/engine/Clock.h"
 #include "include/engine/Game.h"
 #include "include/engine/time.h"
@@ -14,6 +15,8 @@
 using namespace std;
 using namespace Catcher::Survivor;
 
+typedef enum Screen { TITLE, GAMEPLAY, ENDING } Screen;
+
 Game::Game()
 {
     clock = Clock();
@@ -24,6 +27,11 @@ Game::Game()
 void Game::run()
 {
     running = true;
+
+    const int screenWidth = 800;
+    const int screenHeight = 450;
+
+    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic screen manager");
 
     int framesElapsed = 0;
     long int gameStart = timeSinceEpoch();
@@ -42,6 +50,7 @@ void Game::run()
         }
         lateUpdate();
 
+        // Draw to the window
         draw();
         drawGui();
 

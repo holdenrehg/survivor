@@ -12,6 +12,11 @@ Since I'm creating this just for the sake of learning and I'm not a c++ veteran,
 
 This project is being built on an Ubuntu 21.04 instance running on a Dell XPS 15 laptop.
 
+## Dependencies
+
+- `libxrandr-dev`
+- `libxinerama-dev`
+
 ## Building (w/ cmake)
 
 ```console
@@ -21,5 +26,5 @@ $> bin/build
 ## Running
 
 ```console
-$> build/game
+$> build/Survivor
 ```
