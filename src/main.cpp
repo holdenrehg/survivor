@@ -1,14 +1,15 @@
-#include <iostream>
 #include "include/engine/Game.h"
+#include "include/scenes/MainMenuScene.h"
 
 using namespace std;
 using namespace Catcher::Survivor;
 
 int main()
 {
-    Game game;
+    MainMenuScene *scene = new MainMenuScene();
+    Game *game = new Game(scene);
 
-    game.run();
+    game->run();
 
     return 0;
 }

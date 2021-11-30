@@ -2,9 +2,10 @@
 #include <iostream>
 #include <type_traits>
 #include "raylib.h"
+#include "include/engine/time.h"
 #include "include/engine/Clock.h"
 #include "include/engine/Game.h"
-#include "include/engine/time.h"
+#include "include/engine/Scene.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -15,50 +16,60 @@
 using namespace std;
 using namespace Catcher::Survivor;
 
-typedef enum Screen { TITLE, GAMEPLAY, ENDING } Screen;
-
-Game::Game()
+Game::Game(Scene *initialScene)
 {
     clock = Clock();
-    running = false;
+    shouldRun = false;
     timePerUpdate = 1.0;
+    currentScene = initialScene;
 }
 
 void Game::run()
 {
-    running = true;
+    // Initialization ----------------------------------------------------------
+    shouldRun = true;
 
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenWidth = 1920;
+    const int screenHeight = 1080;
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic screen manager");
+    InitWindow(screenWidth, screenHeight, "Survivor");
+    SetWindowState(FLAG_WINDOW_ALWAYS_RUN);
+    SetExitKey(KEY_ESCAPE);
 
     int framesElapsed = 0;
     long int gameStart = timeSinceEpoch();
 
-    while(running)
+    // Game Loop ---------------------------------------------------------------
+    while(isRunning())
     {
         long int frameStart = timeSinceEpoch();
-
         clock.tick();
 
-        update();
+        // Input Handling ------------------------------------------------------
+        currentScene->handleInput();
+
+        // Update Cycles -------------------------------------------------------
+        currentScene->update();
         while(clock.getLag() >= timePerUpdate)
         {
-            fixedUpdate();
+            currentScene->fixedUpdate();
             clock.updateTick(timePerUpdate);
         }
-        lateUpdate();
+        currentScene->lateUpdate();
 
-        // Draw to the window
-        draw();
-        drawGui();
+        // Rendering -----------------------------------------------------------
+        BeginDrawing();
+        currentScene->draw();
+        currentScene->drawGui();
+        EndDrawing();
 
-        // Lock the fps to roughly 60 FPS
+        // Clamp The FPS -------------------------------------------------------
+        // Locks the fps to roughly 60 FPS
         long int toSleep = (frameStart + 16 - timeSinceEpoch()) * 1000;
         usleep(static_cast<int>(toSleep));
 
         // Debugging frames per second
+        // TODO: Put this is a better place, maybe the Clock class
         framesElapsed += 1;
         if(framesElapsed % 100 == 0)
         {
@@ -67,34 +78,17 @@ void Game::run()
             cout << framesPerSecond << " fps" << endl;
         }
     }
+
+    // Cleanup -----------------------------------------------------------------
+    CloseWindow();
 }
 
 void Game::stop()
 {
-    running = false;
+    shouldRun = false;
 }
 
-void Game::fixedUpdate()
+bool Game::isRunning()
 {
-    //
-}
-
-void Game::lateUpdate()
-{
-    //
-}
-
-void Game::update()
-{
-    //
-}
-
-void Game::draw()
-{
-    //
-}
-
-void Game::drawGui()
-{
-    //
+    return shouldRun && !WindowShouldClose();
 }

@@ -1,22 +1,20 @@
 #pragma once
 #include "include/engine/Clock.h"
+#include "include/engine/Scene.h"
 
 namespace Catcher::Survivor
 {
     class Game
     {
         public:
-            Game();
+            Game(Scene *initialScene);
             void run();
             void stop();
         private:
             Clock clock;
-            bool running;
+            Scene *currentScene;
+            bool shouldRun;
             double timePerUpdate;
-            void fixedUpdate();
-            void lateUpdate();
-            void update();
-            void draw();
-            void drawGui();
+            bool isRunning();
     };
 }

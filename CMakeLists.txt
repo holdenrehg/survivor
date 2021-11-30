@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.17)
 
 project(Survivor VERSION 0.1)
 
@@ -39,6 +39,7 @@ add_executable(
     src/engine/EventHandler.cpp
     src/engine/Game.cpp
     src/engine/time.cpp
+    src/scenes/MainMenuScene.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} raylib)
