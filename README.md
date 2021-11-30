@@ -12,18 +12,28 @@ Since I'm creating this just for the sake of learning and I'm not a c++ veteran,
 
 This project is being built on an Ubuntu 21.04 instance running on a Dell XPS 15 laptop.
 
-## Dependencies
+## The Art
+
+I'm using the [Kenny Monochrome RPG asset pack](https://www.kenney.nl/assets/monochrome-rpg) as a starting point for sprites and tiles.
+
+![Kenny Monochrome RGB Tileset Preview](https://github.com/holdenrehg/survivor/blob/main/resources/textures/tilemap_packed.png?raw=true)
+
+---
+
+## Building and running the project
+
+### Dependencies
 
 - `libxrandr-dev`
 - `libxinerama-dev`
 
-## Building (w/ cmake)
+### Building (w/ cmake)
 
 ```console
 $> bin/build
 ```
 
-## Running
+### Running
 
 ```console
 $> build/Survivor
