@@ -7,5 +7,8 @@ using namespace Catcher::Survivor;
 int main()
 {
     Game game;
+
     game.run();
+
+    return 0
 }

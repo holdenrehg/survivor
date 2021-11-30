@@ -34,18 +34,22 @@ void Game::run()
 
         clock.tick();
 
+        update();
         while(clock.getLag() >= timePerUpdate)
         {
-            // update(): TODO
+            fixedUpdate();
             clock.updateTick(timePerUpdate);
         }
+        lateUpdate();
 
-        // render(): TODO
+        draw();
+        drawGui();
 
+        // Lock the fps to roughly 60 FPS
         long int toSleep = (frameStart + 16 - timeSinceEpoch()) * 1000;
         usleep(static_cast<int>(toSleep));
 
-        // Debugging frames per second...
+        // Debugging frames per second
         framesElapsed += 1;
         if(framesElapsed % 100 == 0)
         {
@@ -59,4 +63,29 @@ void Game::run()
 void Game::stop()
 {
     running = false;
+}
+
+void Game::fixedUpdate()
+{
+    //
+}
+
+void Game::lateUpdate()
+{
+    //
+}
+
+void Game::update()
+{
+    //
+}
+
+void Game::draw()
+{
+    //
+}
+
+void Game::drawGui()
+{
+    //
 }

@@ -13,5 +13,10 @@ namespace Catcher::Survivor
             Clock clock;
             bool running;
             double timePerUpdate;
+            void fixedUpdate();
+            void lateUpdate();
+            void update();
+            void draw();
+            void drawGui();
     };
 }
