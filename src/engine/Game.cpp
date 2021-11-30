@@ -30,11 +30,17 @@ void Game::run()
     shouldRun = true;
 
     const int screenWidth = 1920;
-    const int screenHeight = 1080;
+    const int screenHeight = 1280;
+    const int targetWidth = 240;
+    const int targetHeight = 160;
 
     InitWindow(screenWidth, screenHeight, "Survivor");
-    SetWindowState(FLAG_WINDOW_ALWAYS_RUN);
+    SetWindowState(FLAG_WINDOW_ALWAYS_RUN | FLAG_WINDOW_RESIZABLE);
     SetExitKey(KEY_ESCAPE);
+
+    RenderTexture2D target = LoadRenderTexture(targetWidth, targetHeight);
+    Rectangle source = {0, (float) -targetHeight, (float) targetWidth, (float) -targetHeight}; // OpenGL coordinates are inverted
+    Rectangle dest = {0, 0, (float) screenWidth, (float) screenHeight};
 
     int framesElapsed = 0;
     long int gameStart = timeSinceEpoch();
@@ -44,6 +50,14 @@ void Game::run()
     {
         long int frameStart = timeSinceEpoch();
         clock.tick();
+
+        // Window Size Handling ------------------------------------------------
+        // Maintain the same aspect ratio if the window is resized
+        if(IsWindowResized())
+        {
+            // TODO: handle auto adjusting either width or height to maintain
+            // the target aspect ratio
+        }
 
         // Input Handling ------------------------------------------------------
         currentScene->handleInput(this);
@@ -58,9 +72,16 @@ void Game::run()
         currentScene->lateUpdate(this);
 
         // Rendering -----------------------------------------------------------
+        // All draw functions will write to the render texture...
+        BeginTextureMode(target);
+            currentScene->draw(this);
+            currentScene->drawGui(this);
+        EndTextureMode();
+
+        // Then the render texture will get scaled up to the window size
         BeginDrawing();
-        currentScene->draw(this);
-        currentScene->drawGui(this);
+            Vector2 position = { 0, 0 };
+            DrawTexturePro(target.texture, source, dest, position, 0.0f, WHITE);
         EndDrawing();
 
         // Clamp The FPS -------------------------------------------------------

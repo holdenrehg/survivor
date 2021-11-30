@@ -6,7 +6,8 @@ namespace Catcher::Survivor
 {
     class MainMenuScene : public Scene
     {
-        void handleInput(Game *game) override;
-        void draw(Game *game) override;
+        public:
+            void handleInput(Game *game) override;
+            void draw(Game *game) override;
     };
 }

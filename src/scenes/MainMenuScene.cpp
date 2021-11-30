@@ -16,6 +16,6 @@ void MainMenuScene::handleInput(Game *game)
 
 void MainMenuScene::draw(Game *game)
 {
-    ClearBackground(RAYWHITE);
-    DrawText("Press space to play", 190, 200, 20, LIGHTGRAY);
+    ClearBackground(DARKBLUE);
+    DrawText("Press space to play", 10, 10, 8, RAYWHITE);
 }
