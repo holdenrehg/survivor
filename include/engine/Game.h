@@ -1,15 +1,17 @@
 #pragma once
 #include "include/engine/Clock.h"
-#include "include/engine/Scene.h"
 
 namespace Catcher::Survivor
 {
+    class Scene;  // forward delcaration
+
     class Game
     {
         public:
             Game(Scene *initialScene);
             void run();
             void stop();
+            void loadScene(Scene *scene);
         private:
             Clock clock;
             Scene *currentScene;

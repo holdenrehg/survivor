@@ -39,6 +39,7 @@ add_executable(
     src/engine/EventHandler.cpp
     src/engine/Game.cpp
     src/engine/time.cpp
+    src/scenes/GameplayScene.cpp
     src/scenes/MainMenuScene.cpp
 )
 

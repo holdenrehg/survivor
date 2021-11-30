@@ -46,21 +46,21 @@ void Game::run()
         clock.tick();
 
         // Input Handling ------------------------------------------------------
-        currentScene->handleInput();
+        currentScene->handleInput(this);
 
         // Update Cycles -------------------------------------------------------
-        currentScene->update();
+        currentScene->update(this);
         while(clock.getLag() >= timePerUpdate)
         {
-            currentScene->fixedUpdate();
+            currentScene->fixedUpdate(this);
             clock.updateTick(timePerUpdate);
         }
-        currentScene->lateUpdate();
+        currentScene->lateUpdate(this);
 
         // Rendering -----------------------------------------------------------
         BeginDrawing();
-        currentScene->draw();
-        currentScene->drawGui();
+        currentScene->draw(this);
+        currentScene->drawGui(this);
         EndDrawing();
 
         // Clamp The FPS -------------------------------------------------------
@@ -91,4 +91,9 @@ void Game::stop()
 bool Game::isRunning()
 {
     return shouldRun && !WindowShouldClose();
+}
+
+void Game::loadScene(Scene *scene)
+{
+    currentScene = scene;
 }
