@@ -92,7 +92,10 @@ void Game::run()
         // Clamp The FPS -------------------------------------------------------
         // Locks the fps to roughly 60 FPS
         long int toSleep = (frameStart + 16 - timeSinceEpoch()) * 1000;
-        usleep(static_cast<int>(toSleep));
+        if(toSleep > 0)
+        {
+            usleep(static_cast<int>(toSleep));
+        }
 
         // Debugging frames per second
         // TODO: Put this is a better place, maybe the Clock class
