@@ -36,8 +36,8 @@ void Game::run()
 
     const int screenWidth = 1920;
     const int screenHeight = 1280;
-    const int targetWidth = 240;
-    const int targetHeight = 160;
+    const int targetWidth = 480;
+    const int targetHeight = 320;
 
     InitWindow(screenWidth, screenHeight, "Survivor");
     SetWindowState(FLAG_WINDOW_ALWAYS_RUN | FLAG_WINDOW_RESIZABLE);

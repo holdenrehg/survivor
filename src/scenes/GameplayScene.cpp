@@ -9,16 +9,20 @@ using namespace Catcher::Survivor;
 PlayerAnimator::PlayerAnimator()
 {
     spriteSheet = LoadTexture("resources/textures/character_sheet.png");
-    animationDelay = 500;
     lastUpdate = timeSinceEpoch();
     setIdle();
 }
 
 void PlayerAnimator::draw(int x, int y)
 {
+    // Draw the shadow underneath the player sprite
+    Color shadowColor = {0, 0, 0, 70};
+    DrawCircle(x, y - 1, 4, shadowColor);
+
+    // Draw the player sprite
     Vector2 spritePosition = currentFrames[currentFrame];
     Rectangle slice = { spritePosition.x, spritePosition.y, 16, 16 };
-    Vector2 position = { (float)x, (float)y };
+    Vector2 position = { (float)x - 8, (float)y - 16 }; // shifted focus point to the bottom middle of the sprite
     DrawTextureRec(spriteSheet, slice, position, WHITE);
 }
 
@@ -38,11 +42,11 @@ void PlayerAnimator::setIdle()
         currentFrame = 0;
         currentFrameLimit = 2;
         currentAnimation = IDLE;
+        animationDelay = 500;
     }
 
     Vector2 frame0 = { 0, 0 };
     currentFrames[0] = { frame0 };
-
     Vector2 frame1 = { 16, 0 };
     currentFrames[1] = { frame1 };
 }
@@ -52,12 +56,17 @@ void PlayerAnimator::setWalkUp()
     if(currentAnimation != WALK_UP)
     {
         currentFrame = 0;
-        currentFrameLimit = 1;
+        currentFrameLimit = 3;
         currentAnimation = WALK_UP;
+        animationDelay = 100;
     }
 
     Vector2 frame0 = { 0, 32 };
     currentFrames[0] = { frame0 };
+    Vector2 frame1 = { 16, 32 };
+    currentFrames[1] = { frame1 };
+    Vector2 frame2 = { 32, 32 };
+    currentFrames[2] = { frame2 };
 }
 
 void PlayerAnimator::setWalkDown()
@@ -65,12 +74,17 @@ void PlayerAnimator::setWalkDown()
     if(currentAnimation != WALK_DOWN)
     {
         currentFrame = 0;
-        currentFrameLimit = 1;
+        currentFrameLimit = 3;
         currentAnimation = WALK_DOWN;
+        animationDelay = 100;
     }
 
     Vector2 frame0 = { 0, 16 };
     currentFrames[0] = { frame0 };
+    Vector2 frame1 = { 16, 16 };
+    currentFrames[1] = { frame1 };
+    Vector2 frame2 = { 32, 16 };
+    currentFrames[2] = { frame2 };
 }
 
 void PlayerAnimator::setWalkLeft()
@@ -78,12 +92,15 @@ void PlayerAnimator::setWalkLeft()
     if(currentAnimation != WALK_LEFT)
     {
         currentFrame = 0;
-        currentFrameLimit = 1;
+        currentFrameLimit = 2;
         currentAnimation = WALK_LEFT;
+        animationDelay = 200;
     }
 
     Vector2 frame0 = { 0, 64 };
     currentFrames[0] = { frame0 };
+    Vector2 frame1 = { 16, 64 };
+    currentFrames[1] = { frame1 };
 }
 
 void PlayerAnimator::setWalkRight()
@@ -91,12 +108,15 @@ void PlayerAnimator::setWalkRight()
     if(currentAnimation != WALK_RIGHT)
     {
         currentFrame = 0;
-        currentFrameLimit = 1;
+        currentFrameLimit = 2;
         currentAnimation = WALK_RIGHT;
+        animationDelay = 200;
     }
 
     Vector2 frame0 = { 0, 48 };
     currentFrames[0] = { frame0 };
+    Vector2 frame1 = { 16, 48 };
+    currentFrames[1] = { frame1 };
 }
 
 GameplayScene::GameplayScene()
@@ -105,8 +125,8 @@ GameplayScene::GameplayScene()
     tileSprite = LoadTexture("resources/textures/tiles/tile_0000.png");
     playerAnimator = PlayerAnimator();
     playerSpeed = 1;
-    playerX = 10;
-    playerY = 10;
+    playerX = 32;
+    playerY = 32;
 }
 
 void GameplayScene::handleInput(Game *game)
