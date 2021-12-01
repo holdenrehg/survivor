@@ -36,5 +36,11 @@ $> bin/build
 ### Running
 
 ```console
-$> build/Survivor
+$> bin/play
+```
+
+### Valgrind
+
+```console
+$> valgrind --leak-check=yes bin/play
 ```

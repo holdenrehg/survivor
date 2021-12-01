@@ -24,6 +24,11 @@ Game::Game(Scene *initialScene)
     currentScene = initialScene;
 }
 
+Game::~Game()
+{
+    delete currentScene;
+}
+
 void Game::run()
 {
     // Initialization ----------------------------------------------------------
@@ -116,5 +121,6 @@ bool Game::isRunning()
 
 void Game::loadScene(Scene *scene)
 {
+    delete currentScene;
     currentScene = scene;
 }

@@ -9,6 +9,7 @@ namespace Catcher::Survivor
     {
         public:
             Game(Scene *initialScene);
+            ~Game();
             void run();
             void stop();
             void loadScene(Scene *scene);

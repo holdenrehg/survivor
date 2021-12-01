@@ -9,7 +9,7 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
 
     FetchContent_Declare(
         raylib
-       URL https://github.com/raysan5/raylib/archive/master.tar.gz
+        URL https://github.com/raysan5/raylib/archive/master.tar.gz
     )
 
     FetchContent_GetProperties(raylib)
@@ -28,6 +28,9 @@ add_compile_options(-Werror -Wall -Wpedantic -Wconversion)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
+
+set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 
 include_directories(${PROJECT_SOURCE_DIR})
 

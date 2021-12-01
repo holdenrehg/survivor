@@ -6,6 +6,7 @@ namespace Catcher::Survivor
     class Scene
     {
         public:
+            virtual ~Scene() { };
             virtual void handleInput(Game *game) { };
             virtual void fixedUpdate(Game *game) { };
             virtual void lateUpdate(Game *game) { };
