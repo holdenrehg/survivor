@@ -6,13 +6,13 @@ namespace Catcher::Survivor
     {
         public:
             Clock();
-            double getCurrentTime();
-            double getLag();
-            void updateTick(double timePerUpdate);
+            long int getCurrentTime();
+            long int getLag();
+            void updateTick(long int timePerUpdate);
             void resetTime();
             void tick();
         private:
-            double lag;
-            double previousTime;
+            long int lag;
+            long int previousTime;
     };
 }

@@ -17,7 +17,7 @@ namespace Catcher::Survivor
             Clock clock;
             Scene *currentScene;
             bool shouldRun;
-            double timePerUpdate;
+            long int timePerUpdate;
             bool isRunning();
     };
 }

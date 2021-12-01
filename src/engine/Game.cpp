@@ -20,7 +20,7 @@ Game::Game(Scene *initialScene)
 {
     clock = Clock();
     shouldRun = false;
-    timePerUpdate = 1.0;
+    timePerUpdate = 20; // ms
     currentScene = initialScene;
 }
 

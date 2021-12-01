@@ -1,3 +1,4 @@
+#include "include/engine/time.h"
 #include "include/engine/Clock.h"
 
 using namespace Catcher::Survivor;
@@ -7,17 +8,17 @@ Clock::Clock()
     resetTime();
 }
 
-double Clock::getCurrentTime()
+long int Clock::getCurrentTime()
 {
-    return 0;  // TODO
+    return timeSinceEpoch();
 }
 
-double Clock::getLag()
+long int Clock::getLag()
 {
     return lag;
 }
 
-void Clock::updateTick(double timePerUpdate)
+void Clock::updateTick(long int timePerUpdate)
 {
     lag -= timePerUpdate;
 }
@@ -30,8 +31,8 @@ void Clock::resetTime()
 
 void Clock::tick()
 {
-    double currentTime = getCurrentTime();
-    double elapsedTime = currentTime - previousTime;
+    long int currentTime = getCurrentTime();
+    long int elapsedTime = currentTime - previousTime;
 
     previousTime = currentTime;
     lag += elapsedTime;
