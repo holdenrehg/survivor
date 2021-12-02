@@ -86,6 +86,7 @@ void Game::run()
         // Rendering -----------------------------------------------------------
         // All draw functions will write to the render texture...
         BeginTextureMode(target);
+            ClearBackground(WHITE);
             currentScene->draw(this);
             currentScene->drawGui(this);
         EndTextureMode();
@@ -93,6 +94,7 @@ void Game::run()
         // Then the render texture will get scaled up to the window size
         BeginDrawing();
             BeginMode2D(camera);
+                ClearBackground(WHITE);
                 Vector2 position = { 0, 0 };
                 DrawTexturePro(target.texture, source, dest, position, 0.0f, WHITE);
             EndMode2D();

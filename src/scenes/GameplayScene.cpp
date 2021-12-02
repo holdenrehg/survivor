@@ -172,8 +172,6 @@ void GameplayScene::update(Game *game)
 
 void GameplayScene::draw(Game *game)
 {
-    ClearBackground(COLOR_PRIMARY);
-
     // Draw flooring -----------------------------------------------------------
     const int tileSize = 16;  // equal width and height
     const int gridWidth = 64;
