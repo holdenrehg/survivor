@@ -1,4 +1,5 @@
 #pragma once
+#include "raylib.h"
 #include "include/engine/Clock.h"
 
 namespace Catcher::Survivor
@@ -10,6 +11,7 @@ namespace Catcher::Survivor
         public:
             Game(Scene *initialScene);
             ~Game();
+            Camera2D camera;
             void run();
             void stop();
             void loadScene(Scene *scene);

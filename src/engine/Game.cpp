@@ -22,6 +22,13 @@ Game::Game(Scene *initialScene)
     shouldRun = false;
     timePerUpdate = 20; // ms
     currentScene = initialScene;
+
+    Vector2 zeroPosition = { 0, 0 };
+    camera = { 0 };
+    camera.offset = zeroPosition;
+    camera.target = zeroPosition;
+    camera.rotation = 0.0f;
+    camera.zoom = 1.5f;
 }
 
 Game::~Game()
@@ -85,8 +92,10 @@ void Game::run()
 
         // Then the render texture will get scaled up to the window size
         BeginDrawing();
-            Vector2 position = { 0, 0 };
-            DrawTexturePro(target.texture, source, dest, position, 0.0f, WHITE);
+            BeginMode2D(camera);
+                Vector2 position = { 0, 0 };
+                DrawTexturePro(target.texture, source, dest, position, 0.0f, WHITE);
+            EndMode2D();
         EndDrawing();
 
         // Clamp The FPS -------------------------------------------------------

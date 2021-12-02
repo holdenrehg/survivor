@@ -125,8 +125,8 @@ GameplayScene::GameplayScene()
     tileSprite = LoadTexture("resources/textures/tiles/tile_0000.png");
     playerAnimator = PlayerAnimator();
     playerSpeed = 1;
-    playerX = 32;
-    playerY = 32;
+    playerX = 480/3;
+    playerY = 320/3;
 }
 
 void GameplayScene::handleInput(Game *game)
@@ -160,8 +160,14 @@ void GameplayScene::handleInput(Game *game)
 
 void GameplayScene::update(Game *game)
 {
-
     playerAnimator.nextFrame();
+
+    // TODO: need to map between target resolution and the full world size.
+    //       Use actual screen size and target size instead of hardcoding here.
+    const int localTargetX = playerX - (480/3);
+    const int localTargetY = playerY - (320/3);
+    game->camera.target.x = (float)localTargetX * 4.0f;
+    game->camera.target.y = (float)localTargetY * 4.0f;
 }
 
 void GameplayScene::draw(Game *game)
@@ -170,8 +176,8 @@ void GameplayScene::draw(Game *game)
 
     // Draw flooring -----------------------------------------------------------
     const int tileSize = 16;  // equal width and height
-    const int gridWidth = 32;
-    const int gridHeight = 32;
+    const int gridWidth = 64;
+    const int gridHeight = 64;
 
     for(int columnIndex = 0; columnIndex < gridWidth; columnIndex++)
     {
